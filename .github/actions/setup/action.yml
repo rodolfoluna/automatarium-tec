@@ -12,10 +12,6 @@ runs:
       shell: bash
       run: corepack enable
 
-    - name: Installing Latest Yarn
-      shell: bash
-      run: yarn set version stable
-
     - name: Install Yarn Dependencies
       shell: bash
       run: yarn
