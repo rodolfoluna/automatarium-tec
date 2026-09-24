@@ -12,7 +12,9 @@
     "postbuild": "yarn tsx build-sw.ts",
     "serve": "serve dist -l 3000",
     "check:types": "tsc --noemit",
-    "keygen": "tsx scripts/teacher-keygen.ts"
+    "keygen": "tsx scripts/teacher-keygen.ts",
+    "start:teacher": "parcel public/teacher.html --no-cache --port 1240 --dist-dir dist-teacher-dev",
+    "build:teacher": "rm -rf ../dist-teacher && parcel build public/teacher.html --public-url ./ --dist-dir ../dist-teacher --no-cache"
   },
   "dependencies": {
     "@automatarium/jflap-translator": "1.0.0",

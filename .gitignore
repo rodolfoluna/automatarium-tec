@@ -11,3 +11,4 @@ dist
 teacher-key.json
 .env*.local
 dist-teacher
+dist-teacher-dev

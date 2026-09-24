@@ -28,7 +28,10 @@
     "check:types": "yarn workspaces foreach -A run check:types",
     "test": "yarn workspace @automatarium/simulation test && yarn workspace @automatarium/jflap-translator test && yarn workspace @automatarium/secure-file test",
     "dev": "yarn dev:frontend",
-    "build": "yarn build:packages && yarn build:frontend"
+    "build": "yarn build:packages && yarn build:frontend",
+    "build:teacher": "yarn workspace frontend build:teacher",
+    "dev:teacher": "yarn workspace frontend start:teacher",
+    "keygen": "yarn workspace frontend keygen"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
