@@ -1,0 +1,60 @@
+{
+    "section1": {
+        "description": {
+            "paragraph1": "Automatarium es una plataforma hecha por estudiantes para autómatas y teoría de lenguajes formales.",
+            "paragraph2": "Trabaja fácilmente con un diseño sencillo e intuitivo, pensado para ser accesible.",
+            "paragraph3": "Es gratuito y, cuando termines, puedes entregar tu trabajo en un solo archivo.",
+            "paragraph4": "¿Primera vez aquí? ¡Revisa los tutoriales!"
+        },
+        "button": {
+            "start_building": "¡Empieza a construir!",
+            "tutorials": "Tutoriales"
+        }
+    },
+    "banner1": {
+        "description": {
+            "heading": "Automatarium es gratuito y de código abierto",
+            "paragraph1": "Licencia MIT, creado originalmente en la Universidad RMIT"
+        },
+        "button": {
+            "visit_github": "Visitar GitHub"
+        }
+    },
+    "section2": {
+        "description": {
+            "heading": "Laboratorio de pruebas completo",
+            "paragraph1": "Automatarium incluye un laboratorio de pruebas sencillo pero potente. Avanza paso a paso por la entrada y observa en vivo lo que sucede. Cambia la entrada del ejemplo y mira qué pasa.",
+            "paragraph2": "También puedes ejecutar muchas pruebas a la vez y ver cuáles se aceptan y cuáles se rechazan."
+        }
+    },
+    "section3": {
+        "description": {
+            "heading": "Explora tus autómatas",
+            "paragraph1": "Automatarium tiene herramientas para inspeccionar tu autómata y entender cómo reacciona a distintas entradas."
+        }
+    },
+    "section4": {
+        "project_name": "Mi proyecto",
+        "date": "hace 2 días",
+        "description": {
+            "heading": "Entrega en un solo archivo",
+            "paragraph1": "Guarda todos los autómatas de tu práctica como pestañas de una sola entrega y envíasela a tu profesor."
+        }
+    },
+    "banner2": {
+        "description": {
+            "heading": "¿Qué esperas?",
+            "paragraph1": "¡Empieza a construir y probar tus autómatas!"
+        },
+        "button": {
+            "start_building": "¡Empieza a construir!"
+        }
+    },
+    "component": {
+        "testing_lab": {
+            "accepted": "ACEPTADA",
+            "rejected": "RECHAZADA",
+            "input_placeholder": "Escribe una cadena para probar"
+        }
+    }
+}

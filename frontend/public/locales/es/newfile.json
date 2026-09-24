@@ -1,0 +1,49 @@
+{
+    "header": {
+        "button": {
+            "title": "Preferencias"
+        }
+    },
+    "new_project": {
+        "title": "Nuevo proyecto",
+        "button": {
+            "import": "Importar..."
+        },
+        "fsa_desc": "Crea un autómata finito, determinista o no determinista. Representa lenguajes regulares.",
+        "pda_desc": "Crea un autómata con pila. Representa lenguajes libres de contexto.",
+        "tm_desc": "Crea una máquina de Turing. Representa lenguajes recursivamente enumerables."
+    },
+    "examples": {
+        "title": "Ejemplos guiados",
+        "fsa_desc": "Sigue un recorrido guiado para construir un autómata finito.",
+        "pda_desc": "Sigue un recorrido guiado para construir un autómata de pila.",
+        "tm_desc": "Sigue un recorrido guiado para construir una máquina de Turing."
+    },
+    "projects": {
+        "title": "Tus proyectos",
+        "nothing": "Todavía no hay proyectos"
+    },
+    "new_module": {
+        "title": "Nuevo módulo",
+        "button": {
+            "import": "Importar..."
+        },
+        "create": {
+            "title": "Crear módulo nuevo",
+            "description": "Los módulos son preguntas interactivas para evaluar lo que sabes de autómatas."
+        }
+    },
+    "latest_module": {
+        "title": "Módulo en curso"
+    },
+    "modules": {
+        "title": "Tus módulos",
+        "nothing": "Todavía no hay módulos"
+    },
+    "component": {
+        "delete_dialog": {
+            "title": "¿Eliminar?",
+            "description": "Se eliminará {{projectName}} de este dispositivo."
+        }
+    }
+}

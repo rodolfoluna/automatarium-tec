@@ -8,7 +8,7 @@ import { useEvent } from '/src/hooks'
 import { useProjectStore, useModuleStore, useStudentStore } from '/src/stores'
 import { saveCurrentTab, saveModule } from '/src/tec/entregas'
 import { canShareFiles } from '/src/tec/submission'
-import { Share2 } from 'lucide-react'
+import { Save, Share2 } from 'lucide-react'
 
 import {
   Wrapper,
@@ -153,7 +153,9 @@ const Menubar = ({ isSaving }: { isSaving: boolean }) => {
         <Actions>
           {student && <StudentBadge title={student.installId}>{t('student.badge', { ns: 'tec', name: student.name, control: student.controlNumber })}</StudentBadge>}
           {canShareFiles() && <Button secondary icon={<Share2 />} title={t('submission.share', { ns: 'tec' })} onClick={() => dispatchCustomEvent('submission:share', null)} />}
-          <Button onClick={() => dispatchCustomEvent('submission:save', null)}>{t('submission.save', { ns: 'tec' })}</Button>
+          <Button icon={<Save />} title={t('submission.save', { ns: 'tec' })} onClick={() => dispatchCustomEvent('submission:save', null)}>
+            <span className="label-wide">{t('submission.save', { ns: 'tec' })}</span>
+          </Button>
         </Actions>
       </Wrapper>
     </>

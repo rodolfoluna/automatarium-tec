@@ -1,7 +1,7 @@
 import { StrictMode, Suspense, createElement, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { setup, styled } from 'goober'
-import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 import * as Pages from './pages'
 
@@ -148,7 +148,9 @@ const App = () => {
   return <>
     {devBanner}
     <Routes>
-      <Route path="/" element={<Pages.Landing />} />
+      {/* Automatarium Tec: el inicio es la lista de entregas del alumno */}
+      <Route path="/" element={<Navigate to="/new" replace />} />
+      <Route path="/inicio" element={<Pages.Landing />} />
       <Route path="/editor" element={<Pages.Editor />} />
       <Route path="/about" element={<Pages.About />} />
       <Route path="/privacy" element={<Pages.Privacy />} />

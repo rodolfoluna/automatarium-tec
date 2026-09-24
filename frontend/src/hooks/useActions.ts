@@ -87,7 +87,6 @@ const useActions = (registerHotkeys = false) => {
   const removeComments = useProjectStore(s => s.removeComments)
   const removeTransitions = useProjectStore(s => s.removeTransitions)
   const commit = useProjectStore(s => s.commit)
-  const setProject = useProjectStore(s => s.set)
   const setLastSaveDate = useProjectStore(s => s.setLastSaveDate)
   const upsertProject = useProjectsStore(s => s.upsertProject)
   const moveView = useViewStore(s => s.moveViewPosition)

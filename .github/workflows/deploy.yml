@@ -1,31 +1,49 @@
-name: Deploy dev/main
+name: Deploy Automatarium Tec
 on:
   push:
     branches:
-      - dev
-      - main
+      - tec
+  workflow_dispatch:
 
 concurrency:
-  group: pages-${{ github.ref_name }}
+  group: pages-tec
   cancel-in-progress: true
 
 jobs:
-  deploy-dev-main:
+  deploy-tec:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
     - uses: ./.github/actions/setup
 
+    # Las llaves del grupo se generan con `yarn keygen` y se guardan como secretos del repositorio:
+    #   ATEC_APP_SECRET, ATEC_TEACHER_PUBLIC_KEY (y opcionalmente ATEC_CONTROL_REGEX, ATEC_INSTITUTION)
+    - name: Check secrets
+      env:
+        ATEC_APP_SECRET: ${{ secrets.ATEC_APP_SECRET }}
+        ATEC_TEACHER_PUBLIC_KEY: ${{ secrets.ATEC_TEACHER_PUBLIC_KEY }}
+      run: |
+        if [ -z "$ATEC_APP_SECRET" ] || [ -z "$ATEC_TEACHER_PUBLIC_KEY" ]; then
+          echo "::error::Faltan los secretos ATEC_APP_SECRET y/o ATEC_TEACHER_PUBLIC_KEY (ver README-TEC.md)"
+          exit 1
+        fi
+
     - name: Build project
+      env:
+        ATEC_APP_SECRET: ${{ secrets.ATEC_APP_SECRET }}
+        ATEC_TEACHER_PUBLIC_KEY: ${{ secrets.ATEC_TEACHER_PUBLIC_KEY }}
+        ATEC_CONTROL_REGEX: ${{ vars.ATEC_CONTROL_REGEX }}
+        ATEC_INSTITUTION: ${{ vars.ATEC_INSTITUTION }}
       run: yarn build
+
+    - name: Test secure-file
+      run: yarn workspace @automatarium/secure-file test
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: frontend/dist/
-        target-folder: ${{ github.ref_name }}
         clean-exclude: |
           pr-preview/
-          ${{ github.ref_name == 'main' && 'dev/' || 'main/' }}
         force: false
-        commit-message: Deploy to GitHub Pages from ${{ github.ref_name }} branch
+        commit-message: Deploy Automatarium Tec

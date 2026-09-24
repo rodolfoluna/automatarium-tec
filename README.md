@@ -1,3 +1,5 @@
+> **Automatarium Tec:** esta es una adaptación para uso en clase (entregas cifradas, pestañas, herramienta del profesor). Consulta [README-TEC.md](README-TEC.md).
+
 # 🌏 Automatarium
 
 > A place for automata

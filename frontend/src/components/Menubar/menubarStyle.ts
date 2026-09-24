@@ -16,6 +16,7 @@ export const Menu = styled('div')`
   align-items: center;
   gap: 0em;
   flex: 1;
+  min-width: 0;
 
   & > div {
     display: flex;
@@ -78,11 +79,24 @@ export const Actions = styled('div')`
   align-items: center;
   gap: 1em;
   padding: 1em;
+
+  @media (max-width: 700px) {
+    gap: .5em;
+    padding: .5em;
+    /* En celular el botón de guardar solo muestra el ícono */
+    .label-wide { display: none; }
+  }
 `
 
 export const DropdownMenus = styled('div')`
   display: flex;
   gap: .1em;
+
+  @media (max-width: 700px) {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
 `
 
 export const DropdownButtonWrapper = styled('button', forwardRef)<{$active?: boolean}>`

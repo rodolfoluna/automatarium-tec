@@ -52,6 +52,7 @@ export const buildSubmissionFile = async (): Promise<File> => {
     savedAt: Date.now()
   }
   const file = await sealSubmission(payload, await getStudentKeys(student.controlNumber), await getTeacherPublicKey())
+  useProjectStore.getState().setLastSaveDate(Date.now())
   await flushSecureStorage()
   const name = `${student.controlNumber}_${slug(module.meta.name)}${ATEC_EXTENSION}`
   return new File([JSON.stringify(file)], name, { type: 'application/json' })

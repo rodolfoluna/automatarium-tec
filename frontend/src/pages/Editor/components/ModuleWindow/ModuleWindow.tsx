@@ -22,7 +22,6 @@ const ModuleWindow = ({ onPanelWidthChange }) => {
   const { t } = useTranslation(['common', 'editor'])
   const currentModule = useModuleStore(s => s.module)
   const updateQuestion = useModuleStore(s => s.upsertQuestion)
-  const updateProject = useModuleStore(s => s.upsertProject)
   const questions = currentModule.questions
   const totalQuestions = Object.keys(questions).length
   const currentProject = useProjectStore(s => s.project)
@@ -69,16 +68,10 @@ const ModuleWindow = ({ onPanelWidthChange }) => {
     }
   }, [currentModule, currentProject._id])
 
-  const saveModule = () => {
-    const project = useProjectStore.getState().project
-    updateProject({ ...project, meta: { ...project.meta, dateEdited: new Date().getTime() } })
-    updateModule(currentModule)
-  }
-
   const handleEditClick = () => {
     if (isEditing) {
-      const currentQuestionId = Object.keys(questions)[currentQuestionIndex]
-      updateQuestion(currentQuestionId, question)
+      // Las pestañas se pueden reordenar, así que la pregunta se busca por el id de la pestaña
+      updateQuestion(currentProject._id, question)
       updateModule(currentModule)
     }
     setIsEditing(!isEditing)
