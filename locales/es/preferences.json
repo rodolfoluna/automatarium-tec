@@ -1,0 +1,52 @@
+{
+    "title": "Preferencias",
+    "description": "Tus preferencias se guardan en este navegador",
+    "button": {
+        "without_save": "Cerrar sin guardar",
+        "save": "Guardar cambios"
+    },
+    "appearance": {
+        "label": "Apariencia",
+        "theme": {
+            "label": "Tema",
+            "description": "¿Desvelado? Cambia al modo oscuro",
+            "system": "Igual que el sistema",
+            "light": "Claro",
+            "dark": "Oscuro"
+        },
+        "colour_accent": {
+            "label": "Color de acento",
+            "description": "Elige el color de la interfaz",
+            "match": "Según el autómata",
+            "red": "Rojo",
+            "orange": "Naranja",
+            "green": "Verde",
+            "teal": "Verde azulado",
+            "blue": "Azul",
+            "purple": "Morado",
+            "pink": "Rosa"
+        }
+    },
+    "behaviour": {
+        "label": "Comportamiento",
+        "enable_grid": {
+            "label": "Mostrar cuadrícula",
+            "description": "También activa el ajuste a la cuadrícula"
+        },
+        "zoom_control": {
+            "label": "Zoom con la tecla Ctrl",
+            "description": "Permite desplazarte con el touchpad"
+        },
+        "tm_halt": {
+            "label": "Detener la MT en estado final",
+            "description": "Activa o desactiva la detención al hacer la traza de la MT"
+        }
+    },
+    "language": {
+        "label": "Idioma",
+        "language": {
+            "label": "Idioma actual",
+            "description": "Cambia el idioma de la app"
+        }
+    }
+}

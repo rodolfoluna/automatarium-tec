@@ -1,0 +1,68 @@
+{
+  "welcome": {
+    "title": "Welcome to Automatarium",
+    "intro": "This version of Automatarium is for classes at {{institution}}. Before you start, register your details: your files will be bound to your student ID and only you and your teacher will be able to open them.",
+    "control_label": "Student ID",
+    "control_help": "As shown on your student card. With it you can open your files on your phone and your computer.",
+    "name_label": "Full name",
+    "name_placeholder": "First and last name",
+    "accept": "I understand that I will not be able to change these details on this device without deleting all my work.",
+    "continue": "Continue",
+    "confirm_title": "Check that your details are correct:",
+    "confirm_warning": "If your student ID is wrong, your teacher will not be able to identify your submissions.",
+    "back": "Go back",
+    "confirm": "Yes, they are correct",
+    "error_control": "The student ID format is not valid.",
+    "error_name": "Please enter your full name (first and last name).",
+    "error_accept": "You must tick the box to continue.",
+    "loading": "Loading your work…"
+  },
+  "student": {
+    "badge": "{{name}} · {{control}}",
+    "dev_keys": "Test build: submissions use development keys and are NOT secure."
+  },
+  "tabs": {
+    "add": "Add automaton",
+    "close": "Close tab",
+    "close_confirm": "Remove the tab \"{{name}}\" from this submission? This cannot be undone.",
+    "rename": "Double click to rename",
+    "last_tab": "A submission must have at least one automaton.",
+    "imported": "Contains content imported from outside the app"
+  },
+  "submission": {
+    "menu": "Submission",
+    "save": "Save submission (.atec)",
+    "share": "Share submission",
+    "open": "Open submission (.atec)",
+    "saved": "Submission saved.",
+    "save_failed": "The submission could not be saved.",
+    "open_failed": "The file could not be opened.",
+    "wrong_student": "This file belongs to a different student ID and cannot be opened in this app.",
+    "tampered": "The file was modified outside Automatarium and cannot be opened. If this was a mistake, ask your teacher for help.",
+    "not_atec": "The file is not an Automatarium Tec submission.",
+    "replace_confirm": "You already have a newer version of \"{{name}}\" on this device. Replace it with the one from the file?",
+    "import_warning": "Importing a file from outside the app adds it as a new tab. Your teacher will be able to see that this content was imported. Continue?"
+  },
+  "newfile": {
+    "new_title": "New submission",
+    "new_desc_fsa": "Start a submission with a finite state automaton. You can add more tabs later.",
+    "new_desc_pda": "Start a submission with a push down automaton. You can add more tabs later.",
+    "new_desc_tm": "Start a submission with a Turing machine. You can add more tabs later.",
+    "mine": "My submissions",
+    "nothing": "You have no submissions yet.",
+    "tabs_count_one": "{{count}} automaton",
+    "tabs_count_other": "{{count}} automata",
+    "delete_confirm": "Delete the submission \"{{name}}\" from this device? If you did not save it as a file, it will be lost."
+  },
+  "reset": {
+    "label": "Reset the app",
+    "description": "Deletes your registration and ALL work saved on this device. Only use it if you entered the wrong student ID.",
+    "button": "Delete everything",
+    "confirm": "Your registration and all your submissions on this device will be deleted. Type your student ID to confirm:",
+    "mismatch": "The student ID does not match. Nothing was deleted."
+  },
+  "install": {
+    "button": "Install app",
+    "ios": "To install on iPhone or iPad: tap Share, then \"Add to Home Screen\"."
+  }
+}
