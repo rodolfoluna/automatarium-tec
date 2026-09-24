@@ -5,6 +5,9 @@ on:
       - tec
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 concurrency:
   group: pages-tec
   cancel-in-progress: true

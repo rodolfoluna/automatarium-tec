@@ -3,5 +3,5 @@
 	"paragraph1": "Automatarium is a student-led project to provide a modern, intuitive interface for creating and testing automata.",
 	"paragraph2": "Inspired by <linkjflap>JFLAP</linkjflap>, Automatarium allows you to draw a graph, define transitions, and use the Testing Lab to test inputs. It facilitates the creation of Finite State Automata, Pushdown Automata, and Turing Machines.",
 	"paragraph3": "Automatarium is open-source, licensed under MIT, and <linksource>hosted on Github</linksource>. If you spot any bugs or have a feature request, you are welcome to <createissue>create an issue</createissue>.",
-	"note": ""
+	"note": "Automatarium Tec is a classroom adaptation of the original Automatarium project (© 2022 Automatarium: Maxwell Reid, Thomas Dib, Ewan Breakey, Benji Grant, Timothy Tran and contributors, RMIT University), distributed under the same MIT license. It is not affiliated with or endorsed by the original Automatarium team."
 }

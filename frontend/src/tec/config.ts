@@ -21,3 +21,7 @@ export const CONTROL_NUMBER_PATTERN = envControlRegex ? new RegExp(envControlReg
 
 /** Nombre de la institución que se muestra en la app */
 export const INSTITUTION_NAME = process.env.ATEC_INSTITUTION || 'Tecnológico Nacional de México'
+
+/** Repositorio original (crédito, licencia MIT) y repositorio de esta adaptación */
+export const UPSTREAM_REPO_URL = 'https://github.com/automatarium/automatarium'
+export const FORK_REPO_URL = 'https://github.com/rodolfoluna/automatarium-tec'

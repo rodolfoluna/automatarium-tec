@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 import { usePreferencesStore } from '/src/stores'
 import { ChangeEvent } from 'react'
+import { FORK_REPO_URL, UPSTREAM_REPO_URL } from '/src/tec/config'
 
 const Footer = () => {
   const { t, i18n } = useTranslation('common')
@@ -23,7 +24,9 @@ const Footer = () => {
     <Container>
       <FooterItem><Link to="/about">{t('about')}</Link></FooterItem>
       <FooterItem><Link to="/privacy">{t('privacy_policy')}</Link></FooterItem>
-      <FooterItem><a href="https://github.com/automatarium/automatarium" target="_blank" rel="noreferrer nofollow">{t('source_code')}</a></FooterItem>
+      <FooterItem><a href={FORK_REPO_URL} target="_blank" rel="noreferrer nofollow">{t('source_code')}</a></FooterItem>
+      {/* Crédito al proyecto original (licencia MIT) */}
+      <FooterItem><a href={UPSTREAM_REPO_URL} target="_blank" rel="noreferrer nofollow">{t('based_on_automatarium')}</a></FooterItem>
 
       <div style={{ flex: 1 }} />
 
@@ -40,7 +43,7 @@ const Footer = () => {
           ))}
         </select>
       </FooterItem>
-      <FooterItem>{t('licensed_mit')}</FooterItem>
+      <FooterItem><a href="./LICENSE.txt" target="_blank" rel="noreferrer">{t('licensed_mit')}</a></FooterItem>
     </Container>
   )
 }

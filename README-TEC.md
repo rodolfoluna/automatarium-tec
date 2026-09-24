@@ -11,6 +11,23 @@ Adaptación de [Automatarium](https://github.com/automatarium/automatarium) (lic
 
 Toda la interfaz está en español (el inglés sigue disponible en Preferencias).
 
+**App para alumnos:** https://rodolfoluna.github.io/automatarium-tec/
+
+## Créditos y licencia
+
+Automatarium Tec es una obra derivada de **[Automatarium](https://github.com/automatarium/automatarium)**,
+© 2022 Automatarium. Sus autores originales son Maxwell Reid, Thomas Dib, Ewan Breakey, Benji Grant, Timothy Tran
+y los demás [colaboradores](https://github.com/automatarium/automatarium/graphs/contributors), y el proyecto nació en la Universidad RMIT.
+Gracias a ellos por publicarlo como software libre.
+
+- Se distribuye bajo la misma **licencia MIT**. El aviso de copyright original se conserva en [`LICENSE`](LICENSE),
+  y se agregó la línea de copyright de las modificaciones.
+- La app publicada incluye el texto de la licencia (`LICENSE.txt`, enlazado desde el pie de página). También muestra en
+  *Acerca de* y en el pie de página el crédito y el enlace al proyecto original.
+- Este proyecto **no está afiliado ni respaldado** por el equipo original de Automatarium ni por la Universidad RMIT.
+- Principales cambios respecto al original: registro del alumno, almacenamiento cifrado, entregas `.atec` con pestañas,
+  bitácora de integridad, herramienta del profesor, traducción al español y ajustes de PWA. Consulta el historial de git.
+
 ---
 
 ## Guía rápida para el profesor
@@ -22,7 +39,7 @@ corepack yarn install
 corepack yarn keygen
 ```
 
-El comando pide una contraseña y genera dos archivos en `frontend/`:
+El comando pide una contraseña y genera dos archivos en `frontend/`. Con `--out <carpeta>` los genera en otra carpeta; es lo recomendable, fuera del repositorio:
 
 | Archivo | Qué es | Qué hacer con él |
 |---|---|---|

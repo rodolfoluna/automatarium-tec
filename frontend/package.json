@@ -7,7 +7,7 @@
   "scripts": {
     "start": "yarn prebuild && parcel public/index.html --no-cache",
     "copy:locales": "cp -r public/locales dist",
-    "prebuild": "rm -rf dist && mkdir dist && yarn copy:locales && cp public/ping.txt dist/",
+    "prebuild": "rm -rf dist && mkdir dist && yarn copy:locales && cp public/ping.txt dist/ && cp ../LICENSE dist/LICENSE.txt",
     "build": "yarn prebuild && parcel build public/index.html --public-url ./ && yarn postbuild",
     "postbuild": "yarn tsx build-sw.ts",
     "serve": "serve dist -l 3000",
