@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["ES2021", "dom"],
+    "types": ["node", "jest"],
+    "target": "ES2021",
+    "strict": true,
+    "noEmit": true
+  },
+  "include": ["src", "tests"]
+}
