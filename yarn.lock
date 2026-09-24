@@ -36,7 +36,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@automatarium/secure-file@workspace:packages/secure-file":
+"@automatarium/secure-file@npm:1.0.0, @automatarium/secure-file@workspace:packages/secure-file":
   version: 0.0.0-use.local
   resolution: "@automatarium/secure-file@workspace:packages/secure-file"
   dependencies:
@@ -5825,6 +5825,7 @@ __metadata:
   resolution: "frontend@workspace:frontend"
   dependencies:
     "@automatarium/jflap-translator": "npm:1.0.0"
+    "@automatarium/secure-file": "npm:1.0.0"
     "@automatarium/simulation": "npm:2.0.0"
     "@eslint/eslintrc": "npm:^3.3.1"
     "@eslint/js": "npm:^9.28.0"

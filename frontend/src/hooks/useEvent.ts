@@ -87,6 +87,10 @@ export interface CustomEvents {
   'storeTemplateThumbnail': string,
   'selectionGraph:hide': null,
   'tour:start': null,
+  // Automatarium Tec
+  'submission:save': null,
+  'submission:share': null,
+  'submission:open': File | null,
 }
 
 /**

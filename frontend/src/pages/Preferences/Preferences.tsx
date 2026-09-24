@@ -9,6 +9,9 @@ import { Section } from './preferencesStyle'
 import { Preferences } from '/src/stores/usePreferencesStore'
 import { useTranslation } from 'react-i18next'
 import { locales } from '/src/config/i18n'
+import { useStudentStore } from '/src/stores'
+import { resetApp } from '/src/tec/secureStorage'
+import { normalizeControlNumber } from '@automatarium/secure-file'
 
 const defaultValues = {
   theme: 'system',
@@ -16,11 +19,23 @@ const defaultValues = {
   showGrid: true,
   ctrlZoom: true,
   pauseTM: true,
-  language: 'en'
+  language: 'es'
 }
 
 const PreferencesMenu = () => {
-  const { t, i18n } = useTranslation('preferences')
+  const { t, i18n } = useTranslation(['preferences', 'tec'])
+  const student = useStudentStore(s => s.student)
+
+  // Automatarium Tec: cambiar de alumno solo es posible borrando todo el trabajo local
+  const handleReset = () => {
+    const answer = window.prompt(t('reset.confirm', { ns: 'tec' }))
+    if (answer === null) return
+    if (!student || normalizeControlNumber(answer) !== student.controlNumber) {
+      window.alert(t('reset.mismatch', { ns: 'tec' }))
+      return
+    }
+    resetApp()
+  }
   const [isOpen, setIsOpen] = useState(false)
 
   const preferences = usePreferencesStore(state => state.preferences)
@@ -120,6 +135,16 @@ const PreferencesMenu = () => {
                 <option key={localeCode} value={localeCode} style={{ zIndex: 1 }}>{localeName}</option>
               ))}
             </Input>
+          </Preference>
+        </Section>
+
+        <SectionLabel>{t('reset.label', { ns: 'tec' })}</SectionLabel>
+        <Section>
+          <Preference
+            label={t('reset.label', { ns: 'tec' })}
+            description={t('reset.description', { ns: 'tec' })}
+          >
+            <Button secondary onClick={handleReset}>{t('reset.button', { ns: 'tec' })}</Button>
           </Preference>
         </Section>
       </form>

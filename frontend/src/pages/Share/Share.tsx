@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
 import { Spinner } from '/src/components'
-import { useProjectStore, useProjectsStore, useModuleStore, useModulesStore } from '/src/stores'
+import { importExternalModule, importExternalProject } from '/src/tec/submission'
 import { Container } from './shareStyle'
 
 import { useParseFile, useParseModuleFile } from '/src/hooks/useActions'
@@ -16,14 +16,6 @@ const Share = () => {
   const { t } = useTranslation('share')
   const { type, data } = useParams()
   const navigate = useNavigate()
-  const setProject = useProjectStore(s => s.set)
-  const addProject = useProjectsStore(s => s.upsertProject)
-
-  const addModule = useModulesStore(s => s.upsertModule)
-  const setModule = useModuleStore(s => s.setModule)
-  const showModuleWindow = useModuleStore(s => s.showModuleWindow)
-  const setShowModuleWindow = useModuleStore(s => s.setShowModuleWindow)
-  const getModuleProject = useModuleStore(s => s.getProject)
 
   useEffect(() => {
     switch (type) {
@@ -49,19 +41,10 @@ const Share = () => {
     }
   }, [data])
 
-  const onData = (project: Project) => {
-    setProject(project)
-    addProject(project)
-  }
+  // Automatarium Tec: lo compartido por URL entra como contenido importado
+  const onData = (project: Project) => importExternalProject(project, { newEntrega: true })
 
-  const onModule = (module: StoredModule) => {
-    setModule(module)
-    addModule(module)
-    setProject(getModuleProject(0))
-    if (showModuleWindow === false) {
-      setShowModuleWindow(true)
-    }
-  }
+  const onModule = (module: StoredModule) => importExternalModule(module)
 
   const handleLoadSuccess = () => {
     navigate('/editor')

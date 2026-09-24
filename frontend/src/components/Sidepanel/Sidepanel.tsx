@@ -1,11 +1,11 @@
 import { ReactNode, useState, useEffect } from 'react'
-import { ChevronRight, FlaskConical, GraduationCap, Info as InfoIcon, Settings2, Star } from 'lucide-react'
+import { ChevronRight, FlaskConical, Info as InfoIcon, Settings2, Star } from 'lucide-react'
 
 import { Sidebar } from '..'
 import { useEvent } from '/src/hooks'
 
 import { Wrapper, Panel, Heading, CloseButton } from './sidepanelStyle'
-import { TestingLab, Info, Options, Templates, Modules } from './Panels'
+import { TestingLab, Info, Options, Templates } from './Panels'
 import { SidebarButton } from '/src/components/Sidebar/Sidebar'
 import { stopTemplateInsert } from './Panels/Templates/Templates'
 
@@ -49,13 +49,8 @@ const panels: TranslatablePanelItems = (t: TFunction) => [
     value: 'templates',
     icon: <Star />,
     element: <Templates />
-  },
-  {
-    label: t('menus.modules'),
-    value: 'modules',
-    icon: <GraduationCap/>,
-    element: <Modules />
   }
+  // Automatarium Tec: el panel de módulos se reemplazó por las pestañas de la entrega
 ]
 
 type SidePanelProps = {

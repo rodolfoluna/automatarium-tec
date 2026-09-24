@@ -1,0 +1,9 @@
+{
+  "appSecret": "1C5OVwihTz1ais0Mm/6qCIPNGeCk79W+ml27vvICxco=",
+  "teacherPublicKey": {
+    "kty": "EC",
+    "crv": "P-256",
+    "x": "I0FftnrcjZWo9aHoUXUWHSjONX9n3vvwEzUaxMbRh5E",
+    "y": "bCc_7QdApULF-nT2LHLkst19zon4Yv3tP_jgRyrL_qs"
+  }
+}

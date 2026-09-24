@@ -199,7 +199,7 @@ export const journalMetrics = (entries: JournalEntry[]): JournalMetrics => {
     entries: entries.length,
     edits: entries.filter(e => e.k === 'edit').length,
     firstEdit: entries[0]?.t ?? null,
-    lastEdit: entries.at(-1)?.t ?? null,
+    lastEdit: entries[entries.length - 1]?.t ?? null,
     activeMs,
     sessions,
     devices: [...new Set(entries.map(e => e.dev))],

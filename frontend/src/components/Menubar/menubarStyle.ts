@@ -100,3 +100,16 @@ export const DropdownButtonWrapper = styled('button', forwardRef)<{$active?: boo
     background: var(--surface);
   }
 `
+
+export const StudentBadge = styled('span')`
+  font-size: .85em;
+  opacity: .8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 22em;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
+`

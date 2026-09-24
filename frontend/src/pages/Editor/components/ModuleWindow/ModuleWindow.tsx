@@ -16,6 +16,7 @@ import {
 import { X, ChevronRight, ChevronLeft } from 'lucide-react'
 import { Button } from '/src/components'
 import { useTranslation } from 'react-i18next'
+import { switchTab } from '/src/tec/entregas'
 
 const ModuleWindow = ({ onPanelWidthChange }) => {
   const { t } = useTranslation(['common', 'editor'])
@@ -27,7 +28,6 @@ const ModuleWindow = ({ onPanelWidthChange }) => {
   const currentProject = useProjectStore(s => s.project)
   const currentQuestionIndex = currentModule.projects.findIndex(project => project._id === currentProject._id)
   const updateModule = useModulesStore(s => s.upsertModule)
-  const setProject = useProjectStore(s => s.set)
   const currentQuestion = questions[currentProject._id]
   const setShowModuleWindow = useModuleStore(s => s.setShowModuleWindow)
 
@@ -84,10 +84,7 @@ const ModuleWindow = ({ onPanelWidthChange }) => {
     setIsEditing(!isEditing)
   }
 
-  const handlePageChange = (index: number) => {
-    saveModule()
-    setProject(currentModule.projects[index])
-  }
+  const handlePageChange = (index: number) => switchTab(currentModule.projects[index]._id)
 
   // If there are no questions or module data yet, show a loading or fallback message
   if (!questions || totalQuestions === 0 || !currentModule) {

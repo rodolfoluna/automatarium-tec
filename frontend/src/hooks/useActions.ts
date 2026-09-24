@@ -17,6 +17,8 @@ import { haveInputFocused } from '/src/util/actions'
 import { dispatchCustomEvent } from '/src/util/events'
 
 import useModuleStore, { createNewModule } from '../stores/useModuleStore'
+import { importExternalProject } from '/src/tec/submission'
+import { saveCurrentTab } from '/src/tec/entregas'
 import { useTranslation } from 'react-i18next'
 import { TFunction } from 'i18next'
 
@@ -114,18 +116,18 @@ const useActions = (registerHotkeys = false) => {
     IMPORT_AUTOMATARIUM_PROJECT: {
       hotkeys: [{ key: 'i', meta: true }],
       handler: async () => {
-        if (window.confirm(t('use_actions.import_warning'))) { promptLoadFile(t, setProject, t('use_actions.failed_automatarium'), '.json') }
+        if (window.confirm(t('submission.import_warning', { ns: 'tec' }))) { promptLoadFile(t, importExternalProject, t('use_actions.failed_automatarium'), '.json') }
       }
     },
     IMPORT_JFLAP_PROJECT: {
       hotkeys: [{ key: 'i', meta: true, shift: true }],
       handler: async () => {
-        if (window.confirm(t('use_actions.import_warning'))) { promptLoadFile(t, setProject, t('use_actions.failed_jflap'), '.jff') }
+        if (window.confirm(t('submission.import_warning', { ns: 'tec' }))) { promptLoadFile(t, importExternalProject, t('use_actions.failed_jflap'), '.jff') }
       }
     },
     IMPORT_DIALOG: {
       handler: async () => {
-        if (window.confirm(t('use_actions.import_warning'))) { dispatchCustomEvent('modal:import', null) }
+        if (window.confirm(t('submission.import_warning', { ns: 'tec' }))) { dispatchCustomEvent('modal:import', null) }
       }
     },
     IMPORT_MODULE: {
@@ -136,29 +138,23 @@ const useActions = (registerHotkeys = false) => {
     SAVE_FILE: {
       hotkeys: [{ key: 's', meta: true }],
       handler: () => {
-        const project = useProjectStore.getState().project
-        const toSave = { ...project, meta: { ...project.meta, dateEdited: new Date().getTime() } }
-        upsertProject(toSave)
+        if (useModuleStore.getState().module) {
+          saveCurrentTab()
+        } else {
+          const project = useProjectStore.getState().project
+          upsertProject({ ...project, meta: { ...project.meta, dateEdited: new Date().getTime() } })
+        }
         setLastSaveDate(new Date().getTime())
       }
     },
+    // Automatarium Tec: "Guardar como" produce la entrega cifrada .atec
     SAVE_FILE_AS: {
       hotkeys: [{ key: 's', shift: true, meta: true }],
-      handler: () => {
-        // Pull project state
-        const project = useProjectStore.getState().project
-
-        // Create a download link and use it
-        const a = document.createElement('a')
-        const file = new Blob([JSON.stringify(project, null, 2)], { type: 'application/json' })
-        a.href = URL.createObjectURL(file)
-        // File extension explicitly added to allow for file names with dots
-        a.download = project.meta.name.replace(/[#%&{}\\<>*?/$!'":@+`|=]/g, '') + '.json'
-        a.click()
-      }
+      handler: () => dispatchCustomEvent('submission:save', null)
     },
-    ENCODE_FILE: {
-      handler: () => dispatchCustomEvent('showSharing', null)
+    OPEN_SUBMISSION: {
+      hotkeys: [{ key: 'o', meta: true }],
+      handler: () => dispatchCustomEvent('submission:open', null)
     },
     EXPORT: {
       hotkeys: [{ key: 'e', meta: true }],
@@ -176,8 +172,9 @@ const useActions = (registerHotkeys = false) => {
       hotkeys: [{ key: 'c', shift: true, meta: true }],
       handler: () => dispatchCustomEvent('exportImage', { type: 'png', clipboard: true })
     },
+    // Automatarium Tec: deshabilitado para que el trabajo no circule sin cifrar
     EXPORT_AS_JFLAP: {
-      hotkeys: [{ key: 's', shift: true, alt: true, meta: true }],
+      disabled: () => true,
       handler: () => {
         // Pull project state
         const project = useProjectStore.getState().project
@@ -317,10 +314,6 @@ const useActions = (registerHotkeys = false) => {
       hotkeys: [{ key: '4', shift: true }],
       handler: () => dispatchCustomEvent('sidepanel:open', { panel: 'templates' })
     },
-    MODULES: {
-      hotkeys: [{ key: '5', shift: true }],
-      handler: () => dispatchCustomEvent('sidepanel:open', { panel: 'modules' })
-    },
     CONVERT_TO_DFA: {
       disabled: () => projectType !== 'FSA' || project.initialState === null,
       handler: () => {
@@ -344,17 +337,17 @@ const useActions = (registerHotkeys = false) => {
       handler: () => window.open('https://github.com/automatarium/automatarium/wiki', '_blank')
     },
     TUTORIAL_VIDEOS: {
-      handler: () => window.open('/tutorials', '_blank')
+      handler: () => window.open('#/tutorials', '_blank')
     },
     KEYBOARD_SHORTCUTS: {
       hotkeys: [{ key: '/', meta: true }],
       handler: () => dispatchCustomEvent('modal:shortcuts', null)
     },
     PRIVACY_POLICY: {
-      handler: () => window.open('/privacy', '_blank')
+      handler: () => window.open('#/privacy', '_blank')
     },
     OPEN_ABOUT: {
-      handler: () => window.open('/about', '_blank')
+      handler: () => window.open('#/about', '_blank')
     },
     MOVE_VIEW_LEFT: {
       hotkeys: [{ key: 'ArrowLeft' }],

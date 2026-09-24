@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
+import { secureStorage } from '/src/tec/secureStorage'
 import { randomProjectName } from "../util/projectName";
 import { Project, ProjectType } from "../types/ProjectTypes";
 import {
@@ -231,6 +232,8 @@ const useModuleStore = create<ModuleStore>()(
     {
       name: "automatarium-module",
       version: 1,
+      storage: createJSONStorage(() => secureStorage),
+      skipHydration: true,
     }
   )
 );

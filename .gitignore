@@ -7,3 +7,7 @@ dist
 .eslintcache'
 .vscode
 .yarn/install-state.gz
+# Automatarium Tec: llaves reales del profesor y configuración de compilación
+teacher-key.json
+.env*.local
+dist-teacher

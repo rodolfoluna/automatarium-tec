@@ -11,7 +11,7 @@ dayjs.extend(relativeTime)
 
 type ProjectCardProps = {
   name: string
-  type?: ProjectType | '???' // '???' is used has a default type
+  type?: ProjectType | '???' | string // '???' is used has a default type
   date: string | Dayjs
   image?: string
   isSelectedTemplate?: boolean,

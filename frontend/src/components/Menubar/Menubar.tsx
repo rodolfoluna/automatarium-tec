@@ -5,8 +5,10 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 
 import { Button, Logo, Dropdown } from '/src/components'
 import { useEvent } from '/src/hooks'
-import { useProjectStore, useProjectsStore, useModuleStore, useModulesStore } from '/src/stores'
-import { dispatchCustomEvent } from '/src/util/events'
+import { useProjectStore, useModuleStore, useStudentStore } from '/src/stores'
+import { saveCurrentTab, saveModule } from '/src/tec/entregas'
+import { canShareFiles } from '/src/tec/submission'
+import { Share2 } from 'lucide-react'
 
 import {
   Wrapper,
@@ -17,10 +19,12 @@ import {
   DropdownMenus,
   Actions,
   DropdownButtonWrapper,
-  NameInput
+  NameInput,
+  StudentBadge
 } from './menubarStyle'
 
 import menus from './menus'
+import { dispatchCustomEvent } from '/src/util/events'
 import { ContextItem } from '/src/components/ContextMenus/contextItem'
 import { useTranslation } from 'react-i18next'
 
@@ -70,45 +74,25 @@ const Menubar = ({ isSaving }: { isSaving: boolean }) => {
   const [editingTitle, setEditingTitle] = useState(false)
   const [titleValue, setTitleValue] = useState('')
 
-  const projectName = useProjectStore(s => s.project?.meta?.name)
-  const setProjectName = useProjectStore(s => s.setName)
+  // Automatarium Tec: el título es el nombre de la entrega; cada pestaña tiene su propio nombre
+  const entregaName = useModuleStore(s => s.module?.meta?.name)
+  const setEntregaName = useModuleStore(s => s.setName)
   const lastChangeDate = useProjectStore(s => s.lastChangeDate)
   const lastSaveDate = useProjectStore(s => s.lastSaveDate)
   const setLastSaveDate = useProjectStore(s => s.setLastSaveDate)
-  const upsertProject = useProjectsStore(s => s.upsertProject)
-  const deleteProject = useProjectsStore(s => s.deleteProject)
-  const { t } = useTranslation('common')
-
-  // Modules
-  const upsertModuleProject = useModuleStore(s => s.upsertProject)
-  const upsertModule = useModulesStore(s => s.upsertModule)
-  const currentModule = useModuleStore(s => s.module)
+  const student = useStudentStore(s => s.student)
+  const { t } = useTranslation(['common', 'tec'])
 
   const handleEditProjectName = () => {
-    setTitleValue(projectName ?? '')
+    setTitleValue(entregaName ?? '')
     setEditingTitle(true)
     window.setTimeout(() => titleRef.current?.select(), 50)
   }
 
-  const saveProject = () => {
-    const project = useProjectStore.getState().project
-    upsertProject({ ...project, meta: { ...project.meta, dateEdited: new Date().getTime() } })
-    setLastSaveDate(new Date().getTime())
-  }
-
-  const saveLabProject = () => {
-    const project = useProjectStore.getState().project
-    upsertModuleProject({ ...project, meta: { ...project.meta, dateEdited: new Date().getTime() } })
-  }
-
-  const saveLab = () => {
-    upsertModule(currentModule)
-  }
-
   const handleSaveProjectName = () => {
     if (titleValue && !/^\s*$/.test(titleValue)) {
-      setProjectName(titleValue)
-      saveProject()
+      setEntregaName(titleValue.trim())
+      saveModule()
     }
     setEditingTitle(false)
   }
@@ -125,18 +109,8 @@ const Menubar = ({ isSaving }: { isSaving: boolean }) => {
         <Menu>
           <a href="/new" onClick={e => {
             e.preventDefault()
-            const project = useProjectStore.getState().project
-            const totalItems = project.comments.length + project.states.length + project.transitions.length
-            if (totalItems > 0) {
-              if (currentModule != null) {
-                saveLabProject()
-                saveLab()
-              } else {
-                saveProject()
-              }
-            } else {
-              deleteProject(project._id)
-            }
+            saveCurrentTab()
+            setLastSaveDate(new Date().getTime())
             navigate('/new')
           }}>
             <Logo />
@@ -152,11 +126,11 @@ const Menubar = ({ isSaving }: { isSaving: boolean }) => {
                   onBlur={handleSaveProjectName}
                   onKeyDown={e => e.code === 'Enter' && handleSaveProjectName()}
                   ref={titleRef}
-                  disabled={currentModule != null}
+                  maxLength={60}
                 />
                   )
                 : (
-                <Name onClick={handleEditProjectName} title={t('menubar.edit_title')}>{projectName ?? t('menubar.untitled')}</Name>
+                <Name onClick={handleEditProjectName} title={t('menubar.edit_title')}>{entregaName ?? t('menubar.untitled')}</Name>
                   )}
               <SaveStatus $show={isSaving}>{t('menubar.saving')}</SaveStatus>
             </NameRow>
@@ -177,7 +151,9 @@ const Menubar = ({ isSaving }: { isSaving: boolean }) => {
         </Menu>
 
         <Actions>
-          {<Button onClick={() => dispatchCustomEvent('showSharing', null)}>{t('share')}</Button>}
+          {student && <StudentBadge title={student.installId}>{t('student.badge', { ns: 'tec', name: student.name, control: student.controlNumber })}</StudentBadge>}
+          {canShareFiles() && <Button secondary icon={<Share2 />} title={t('submission.share', { ns: 'tec' })} onClick={() => dispatchCustomEvent('submission:share', null)} />}
+          <Button onClick={() => dispatchCustomEvent('submission:save', null)}>{t('submission.save', { ns: 'tec' })}</Button>
         </Actions>
       </Wrapper>
     </>

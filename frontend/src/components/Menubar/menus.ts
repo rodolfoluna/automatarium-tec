@@ -20,6 +20,14 @@ const menus: TranslatableContextItems = (t: TFunction) => [
       //     // { label: 'Turing machine' },
       //   ],
       // },
+      {
+        label: t('submission.open', { ns: 'tec' }),
+        action: 'OPEN_SUBMISSION'
+      },
+      {
+        label: t('submission.save', { ns: 'tec' }),
+        action: 'SAVE_FILE_AS'
+      },
       'hr',
       {
         label: t('import', { ns: 'common' }),
@@ -56,20 +64,8 @@ const menus: TranslatableContextItems = (t: TFunction) => [
           {
             label: t('menus.export_clipboard', { ns: 'common' }),
             action: 'EXPORT_TO_CLIPBOARD'
-          },
-          'hr',
-          {
-            label: t('menus.export_automatarium', { ns: 'common' }),
-            action: 'SAVE_FILE_AS'
-          },
-          {
-            label: t('menus.export_jflap', { ns: 'common' }),
-            action: 'EXPORT_AS_JFLAP'
-          },
-          {
-            label: t('menus.export_url_data', { ns: 'common' }),
-            action: 'ENCODE_FILE'
           }
+          // Automatarium Tec: no se exporta a JSON/JFLAP/URL para que el trabajo no circule sin cifrar
         ]
       },
       'hr',
@@ -162,10 +158,6 @@ const menus: TranslatableContextItems = (t: TFunction) => [
       {
         label: t('menus.templates', { ns: 'common' }),
         action: 'TEMPLATES'
-      },
-      {
-        label: t('menus.modules', { ns: 'common' }),
-        action: 'MODULES'
       }
     ]
   },

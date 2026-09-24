@@ -184,10 +184,6 @@ const shortcuts: TranslatableCategories = (t: TFunction) => [
         action: 'TEMPLATES'
       },
       {
-        label: t('menus.modules'),
-        action: 'MODULES'
-      },
-      {
         label: t('shortcuts.move_view'),
         hotkeys: [{ key: '←' }, { key: '↑' }, { key: '→' }, { key: '↓' }]
       },

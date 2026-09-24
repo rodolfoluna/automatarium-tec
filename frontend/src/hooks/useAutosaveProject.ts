@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { useProjectsStore, useProjectStore, useModuleStore, useModulesStore } from '/src/stores'
+import { useProjectsStore, useProjectStore, useModuleStore } from '/src/stores'
+import { saveCurrentTab } from '/src/tec/entregas'
 import dayjs from 'dayjs'
 
 const SAVE_INTERVAL = 5 * 1000
@@ -8,35 +9,27 @@ const SAVE_DIALOG_MIN_TIME = 1.5 * 1000
 
 /**
  * Use this to save the project on an interval. The project will only save if there are changes
- * and there are items in the project
  * @see SAVE_INTERVAL
  */
 const useAutosaveProject = () => {
   const upsertProject = useProjectsStore(s => s.upsertProject)
-  const upsertModuleProject = useModuleStore(s => s.upsertProject)
-  const upsertModules = useModulesStore(s => s.upsertModule)
   const lastChangeDate = useProjectStore(s => s.lastChangeDate)
   const lastSaveDate = useProjectStore(s => s.lastSaveDate)
   const setLastSaveDate = useProjectStore(s => s.setLastSaveDate)
   const [isSaving, setIsSaving] = useState(false)
-  const currentModule = useModuleStore(s => s.module)
 
   useEffect(() => {
     const timer = setInterval(() => {
       const currP = useProjectStore.getState().project
-      const totalItems = currP.comments.length + currP.states.length + currP.transitions.length
-      // Only save if there has been a change and there is something in the project
-      if ((!lastSaveDate || dayjs(lastChangeDate).isAfter(lastSaveDate)) && totalItems > 0) {
+      if (!currP) return
+      // Only save if there has been a change
+      if (!lastSaveDate || dayjs(lastChangeDate).isAfter(lastSaveDate)) {
         setIsSaving(true)
-        const toSave = { ...currP, meta: { ...currP.meta, dateEdited: new Date().getTime() } }
-
-        if (currentModule != null) {
-          // Save to module
-          upsertModuleProject(toSave)
-          // Save module to modules locally on local storage
-          upsertModules(currentModule)
+        if (useModuleStore.getState().module != null) {
+          // Automatarium Tec: se guarda la pestaña dentro de la entrega
+          saveCurrentTab()
         } else {
-          upsertProject(toSave)
+          upsertProject({ ...currP, meta: { ...currP.meta, dateEdited: new Date().getTime() } })
         }
         setLastSaveDate(new Date().getTime())
         // Hide "Saving..." dialog after a short delay

@@ -27,7 +27,7 @@ const defaultPreferences: Preferences = {
   showGrid: true,
   ctrlZoom: !navigator.platform?.match(/Win/), // Default to false on windows, which more often has a mouse
   pauseTM: true,
-  language: 'en'
+  language: 'es'
 }
 
 const usePreferencesStore = create<PreferencesStore>()(persist((set: SetState<PreferencesStore>, get) => ({

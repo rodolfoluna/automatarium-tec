@@ -1,6 +1,6 @@
 import { StrictMode, Suspense, createElement, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
-import { setup } from 'goober'
+import { setup, styled } from 'goober'
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom'
 
 import * as Pages from './pages'
@@ -16,6 +16,35 @@ import '/src/config/i18n'
 import favicon from 'bundle-text:/public/logo.svg'
 import { UpdateToast } from './components/Toast/UpdateToast/UpdateToast'
 import { OfflineReadyToast } from './components/Toast/OfflineReadyToast/OfflineReadyToast'
+import { Spinner } from '/src/components'
+import Welcome from './pages/Welcome/Welcome'
+import SubmissionController from './components/Submission/SubmissionController'
+import { dispatchCustomEvent } from './util/events'
+import { useSecureHydration } from './tec/hydration'
+import { USING_DEV_KEYS } from './tec/config'
+import { useTranslation } from 'react-i18next'
+
+const DevKeysBanner = styled('div')`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  padding: .2em .8em;
+  font-size: .75em;
+  color: white;
+  background: #b03a2e;
+  border-top-right-radius: .4em;
+  pointer-events: none;
+`
+
+const LoadingScreen = styled('div')`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+`
 
 // Set up goober to use React
 setup(
@@ -90,7 +119,34 @@ const App = () => {
 
   useEgg()
 
+  // Automatarium Tec: registro del alumno y carga de su trabajo cifrado
+  const { student, ready } = useSecureHydration()
+  const { t } = useTranslation('tec')
+  // Archivos .atec abiertos desde el sistema operativo (PWA instalada, file_handlers)
+  useEffect(() => {
+    if (!ready) return
+    const launchQueue = (window as unknown as { launchQueue?: { setConsumer: (fn: (p: { files: FileSystemFileHandle[] }) => void) => void } }).launchQueue
+    launchQueue?.setConsumer(async ({ files }) => {
+      for (const handle of files ?? []) dispatchCustomEvent('submission:open', await handle.getFile())
+    })
+  }, [ready])
+
+  const devBanner = USING_DEV_KEYS && <DevKeysBanner>{t('student.dev_keys')}</DevKeysBanner>
+
+  if (!student) {
+    return <>
+      <Welcome />
+      {devBanner}
+      <Warning />
+    </>
+  }
+
+  if (!ready) {
+    return <LoadingScreen><Spinner /><span>{t('welcome.loading')}</span></LoadingScreen>
+  }
+
   return <>
+    {devBanner}
     <Routes>
       <Route path="/" element={<Pages.Landing />} />
       <Route path="/editor" element={<Pages.Editor />} />
@@ -105,6 +161,7 @@ const App = () => {
     {!hideFooter && <Footer />}
     {showUpdateToast && <UpdateToast />}
     {showOfflineReadyToast && <OfflineReadyToast />}
+    <SubmissionController />
     <Warning />
     <Pages.Preferences />
   </>

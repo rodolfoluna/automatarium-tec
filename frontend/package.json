@@ -11,10 +11,12 @@
     "build": "yarn prebuild && parcel build public/index.html --public-url ./ && yarn postbuild",
     "postbuild": "yarn tsx build-sw.ts",
     "serve": "serve dist -l 3000",
-    "check:types": "tsc --noemit"
+    "check:types": "tsc --noemit",
+    "keygen": "tsx scripts/teacher-keygen.ts"
   },
   "dependencies": {
     "@automatarium/jflap-translator": "1.0.0",
+    "@automatarium/secure-file": "1.0.0",
     "@automatarium/simulation": "2.0.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.28.0",

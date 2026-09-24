@@ -1,5 +1,6 @@
 import { create, SetState } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
+import { secureStorage } from '/src/tec/secureStorage'
 import { Project } from '/src/types/ProjectTypes'
 
 interface ProjectsStore {
@@ -21,7 +22,9 @@ const useProjectsStore = create<ProjectsStore>()(persist((set: SetState<Projects
   })),
   deleteProject: pid => set(s => ({ projects: s.projects.filter(p => p._id !== pid) }))
 }), {
-  name: 'automatarium-projects'
+  name: 'automatarium-projects',
+  storage: createJSONStorage(() => secureStorage),
+  skipHydration: true
 }))
 
 export default useProjectsStore

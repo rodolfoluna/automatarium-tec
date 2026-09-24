@@ -3,7 +3,7 @@ import { NavigateFunction } from 'react-router-dom'
 
 import { useEvent } from '/src/hooks'
 import { promptLoadFile, urlLoadFile } from '/src/hooks/useActions'
-import { useProjectStore, useProjectsStore } from '/src/stores'
+import { importExternalProject } from '/src/tec/submission'
 
 import { ErrorText, ImportButtonWrapper } from './importDialogStyle'
 import { Button, Input, Modal, Spinner } from '/src/components'
@@ -19,8 +19,6 @@ type ImportDialogProps = {
 
 const ImportDialog = ({ navigateFunction }: ImportDialogProps) => {
   const navigate = navigateFunction
-  const setProject = useProjectStore(s => s.set)
-  const upsertProject = useProjectsStore(s => s.upsertProject)
 
   const [modalOpen, setModalOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -59,10 +57,8 @@ const ImportDialog = ({ navigateFunction }: ImportDialogProps) => {
     setUrlError(false)
   }
 
-  const onData = (project: Project) => {
-    setProject(project)
-    upsertProject(project)
-  }
+  // Automatarium Tec: lo importado entra como pestaña nueva y queda marcado en la bitácora
+  const onData = (project: Project) => importExternalProject(project)
 
   return loading
     ? <Container><Spinner /></Container>

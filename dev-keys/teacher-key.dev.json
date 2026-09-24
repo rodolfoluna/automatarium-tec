@@ -1,0 +1,19 @@
+{
+  "format": "automatarium-tec-teacher-key",
+  "v": 1,
+  "createdAt": 1790286812005,
+  "publicKey": {
+    "kty": "EC",
+    "crv": "P-256",
+    "x": "I0FftnrcjZWo9aHoUXUWHSjONX9n3vvwEzUaxMbRh5E",
+    "y": "bCc_7QdApULF-nT2LHLkst19zon4Yv3tP_jgRyrL_qs"
+  },
+  "kdf": {
+    "name": "PBKDF2",
+    "hash": "SHA-256",
+    "iterations": 600000,
+    "salt": "7IHSB0oaOPU4eWoIr4JgSA=="
+  },
+  "iv": "YM+l29ixJRUOqPS4",
+  "encryptedPrivateKey": "6x4SqH3CCa91RqSAIWB5Fk1VtoH91IZAaWvR4u5/lDGfYhcVZR5ylyeDQdMUSRfd7rK4QtNr5YvZdGyhJaN+Wa4AZ3qkkhemQRdP8CkjtAw0rVCDDU+uuAW0V0u83kGdA6evYImvuYpw1p5kKUTCnHg37sIkTqh4gZjeQmFFzlbocEbOsxx2qV7TmyIAg4DI56hvc9UkkOqKxg=="
+}

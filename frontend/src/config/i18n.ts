@@ -4,6 +4,7 @@ import Backend from 'i18next-http-backend'
 
 // Contains the different locale codes as the key and locale names as the value
 export const locales = {
+  es: 'Español',
   en: 'English',
   bg: 'Български'
 }
@@ -15,11 +16,11 @@ const localeNamespaces = [
 
 i18n.use(Backend).use(initReactI18next).init({
   lng: JSON.parse(localStorage.getItem('automatarium-preferences'))?.state.preferences.language,
-  fallbackLng: 'en',
+  fallbackLng: ['es', 'en'],
   supportedLngs: Object.keys(locales),
   defaultNS: localeNamespaces.at(0),
   ns: localeNamespaces,
-  debug: true,
+  debug: process.env.NODE_ENV === 'development',
   react: {
     useSuspense: true
   },

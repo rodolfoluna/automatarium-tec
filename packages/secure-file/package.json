@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Formato de entrega cifrado (.atec) y bitácora de integridad para Automatarium Tec",
   "license": "MIT",
+  "type": "module",
   "main": "src/index.ts",
   "typings": "src/index.ts",
   "scripts": {

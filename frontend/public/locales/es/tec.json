@@ -1,0 +1,68 @@
+{
+  "welcome": {
+    "title": "Bienvenido a Automatarium",
+    "intro": "Esta versión de Automatarium es para las clases del {{institution}}. Antes de empezar, registra tus datos: tus archivos quedarán ligados a tu número de control y solo tú y tu profesor podrán abrirlos.",
+    "control_label": "Número de control",
+    "control_help": "Tal como aparece en tu credencial. Con este número podrás abrir tus archivos en tu celular y en tu computadora.",
+    "name_label": "Nombre completo",
+    "name_placeholder": "Nombre(s) y apellidos",
+    "accept": "Entiendo que después no podré cambiar estos datos en este dispositivo sin borrar todo mi trabajo.",
+    "continue": "Continuar",
+    "confirm_title": "Revisa que tus datos sean correctos:",
+    "confirm_warning": "Si el número de control está mal, tu profesor no podrá identificar tus entregas.",
+    "back": "Corregir",
+    "confirm": "Sí, son correctos",
+    "error_control": "El número de control no tiene un formato válido.",
+    "error_name": "Escribe tu nombre completo (nombre y apellido).",
+    "error_accept": "Debes marcar la casilla para continuar.",
+    "loading": "Cargando tu trabajo…"
+  },
+  "student": {
+    "badge": "{{name}} · {{control}}",
+    "dev_keys": "Compilación de prueba: las entregas usan llaves de desarrollo y NO son seguras."
+  },
+  "tabs": {
+    "add": "Agregar autómata",
+    "close": "Cerrar pestaña",
+    "close_confirm": "¿Eliminar la pestaña \"{{name}}\" de esta entrega? No se puede deshacer.",
+    "rename": "Doble clic para cambiar el nombre",
+    "last_tab": "Una entrega debe tener al menos un autómata.",
+    "imported": "Contiene contenido importado desde fuera de la app"
+  },
+  "submission": {
+    "menu": "Entrega",
+    "save": "Guardar entrega (.atec)",
+    "share": "Compartir entrega",
+    "open": "Abrir entrega (.atec)",
+    "saved": "Entrega guardada.",
+    "save_failed": "No se pudo guardar la entrega.",
+    "open_failed": "No se pudo abrir el archivo.",
+    "wrong_student": "Este archivo pertenece a otro número de control y no se puede abrir en esta app.",
+    "tampered": "El archivo fue modificado fuera de Automatarium y no se puede abrir. Si fue un error, pide ayuda a tu profesor.",
+    "not_atec": "El archivo no es una entrega de Automatarium Tec.",
+    "replace_confirm": "Ya tienes una versión más reciente de \"{{name}}\" en este dispositivo. ¿Reemplazarla por la del archivo?",
+    "import_warning": "Importar un archivo de fuera de la app lo agrega como una pestaña nueva. Tu profesor podrá ver que ese contenido fue importado. ¿Continuar?"
+  },
+  "newfile": {
+    "new_title": "Nueva entrega",
+    "new_desc_fsa": "Empieza una entrega con un autómata finito. Después puedes agregar más pestañas.",
+    "new_desc_pda": "Empieza una entrega con un autómata de pila. Después puedes agregar más pestañas.",
+    "new_desc_tm": "Empieza una entrega con una máquina de Turing. Después puedes agregar más pestañas.",
+    "mine": "Mis entregas",
+    "nothing": "Todavía no tienes entregas.",
+    "tabs_count_one": "{{count}} autómata",
+    "tabs_count_other": "{{count}} autómatas",
+    "delete_confirm": "¿Borrar la entrega \"{{name}}\" de este dispositivo? Si no la guardaste como archivo, se perderá."
+  },
+  "reset": {
+    "label": "Restablecer la app",
+    "description": "Borra tu registro y TODO el trabajo guardado en este dispositivo. Úsalo solo si te equivocaste de número de control.",
+    "button": "Borrar todo",
+    "confirm": "Se borrarán tu registro y todas tus entregas de este dispositivo. Escribe tu número de control para confirmar:",
+    "mismatch": "El número de control no coincide. No se borró nada."
+  },
+  "install": {
+    "button": "Instalar app",
+    "ios": "Para instalar en iPhone o iPad: toca Compartir y luego \"Agregar a pantalla de inicio\"."
+  }
+}

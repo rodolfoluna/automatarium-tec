@@ -1,5 +1,7 @@
 import { create, SetState, GetState } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
+import { secureStorage } from '/src/tec/secureStorage'
+import { pickGraph, sameGraph } from '@automatarium/secure-file'
 import produce, { current } from 'immer'
 import clone from 'lodash.clonedeep'
 
@@ -89,7 +91,13 @@ interface ProjectStore {
   historyPointer: number,
   lastChangeDate: number,
   lastSaveDate: number,
+  /** Historial de deshacer de las otras pestañas (solo en memoria) */
+  histories: Record<string, { history: Project[], historyPointer: number }>,
   set: (project: Project) => void,
+  /**
+   * Cambia a otra pestaña conservando el historial de deshacer de cada una
+   */
+  switchProject: (project: Project) => void,
   /**
    * Updates the current project. This doesn't reset the history like `set`
    * @param project
@@ -149,8 +157,20 @@ const useProjectStore = create<ProjectStore>()(persist((set: SetState<ProjectSto
   historyPointer: null,
   lastChangeDate: null,
   lastSaveDate: null,
+  histories: {},
 
   set: (project: Project) => { set({ project, history: [clone(project)], historyPointer: 0 }) },
+
+  switchProject: (project: Project) => set((s: ProjectStore) => {
+    const histories = { ...s.histories }
+    if (s.project) histories[s.project._id] = { history: s.history, historyPointer: s.historyPointer }
+    const saved = histories[project._id]
+    // Solo se restaura si el historial corresponde a la versión guardada de la pestaña
+    if (saved && sameGraph(pickGraph(saved.history[saved.historyPointer]), pickGraph(project))) {
+      return { project, history: saved.history, historyPointer: saved.historyPointer, histories }
+    }
+    return { project, history: [clone(project)], historyPointer: 0, histories }
+  }),
 
   update: (project: Project) => set(produce((state: ProjectStore) => {
     state.project = project
@@ -446,7 +466,11 @@ const useProjectStore = create<ProjectStore>()(persist((set: SetState<ProjectSto
 
   reset: () => set({ project: createNewProject(), history: [], historyPointer: 0, lastChangeDate: -1, lastSaveDate: -1 })
 }), {
-  name: 'automatarium-project'
+  name: 'automatarium-project',
+  storage: createJSONStorage(() => secureStorage),
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  partialize: ({ histories, ...rest }) => rest,
+  skipHydration: true
 }))
 
 export default useProjectStore

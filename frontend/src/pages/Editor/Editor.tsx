@@ -4,6 +4,7 @@ import { Menubar, Toolbar, EditorPanel, BottomPanel, Sidepanel, ExportImage, Imp
 import { useAutosaveProject } from "../../hooks";
 import { useModuleStore, useProjectStore } from "/src/stores";
 import ModuleWindow from "./components/ModuleWindow/ModuleWindow";
+import TabBar from "./components/TabBar/TabBar";
 import PDAStackVisualiser from "../../components/PDAStackVisualiser/stackVisualiser";
 import TemplateDelConfDialog from "./components/TemplateDelConfDialog/TemplateDelConfDialog";
 import EditorPageTour from "../Tutorials/guidedTour/EditorPageTour";
@@ -50,9 +51,10 @@ function Editor() {
   return (
     <>
       <Menubar isSaving={isSaving} />
+      <TabBar />
       <Content>
         <Toolbar />
-        {showModuleWindow && module && (
+        {showModuleWindow && module?.questions?.[project?._id]?.trim() && (
           <ModuleWindow onPanelWidthChange={handlePanelWidthChange} />
         )}
         <EditorContent>
